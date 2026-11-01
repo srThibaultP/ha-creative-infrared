@@ -44,4 +44,7 @@ jobs:
       - name: Tests (100% coverage)
         run: uv run --no-sync pytest --cov -p no:cacheprovider
       - name: Strict typing
+        # Editable installs are invisible to mypy, point it at the checkout
+        env:
+          MYPYPATH: ha-core
         run: uv run --no-sync mypy
