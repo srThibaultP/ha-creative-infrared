@@ -1,5 +1,7 @@
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+# The respx plugin imports httpx before Home Assistant can alias it to httpx2
+addopts = "-p no:respx"
 testpaths = ["tests"]
 
 [tool.coverage.run]
