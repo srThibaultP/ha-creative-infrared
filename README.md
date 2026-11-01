@@ -11,6 +11,6 @@ The remote uses NEC extended address `0xA4BF`; command bytes are in `custom_comp
 
 ## Install
 
-Copy `custom_components/creative_infrared` to `/config/custom_components/`, restart Home Assistant, then add **Creative Infrared** from Settings > Devices & services and pick the IR emitter.
+Install it from the Home Assistant Marketplace (HACS): add `srThibaultP/ha-creative-infrared` as a custom repository, category Integration, then install it. Or copy `custom_components/creative_infrared` to `/config/custom_components/`, restart Home Assistant, then add **Creative Infrared** from Settings > Devices & services and pick the IR emitter.
 
 Requires Home Assistant 2026.11 or later (the `infrared` integration).
