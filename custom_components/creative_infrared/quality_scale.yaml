@@ -1,0 +1,103 @@
+rules:
+  # Bronze
+  action-setup:
+    status: exempt
+    comment: This integration does not provide additional actions.
+  appropriate-polling:
+    status: exempt
+    comment: This integration does not poll.
+  brands:
+    status: todo
+    comment: Needs a Creative icon in the home-assistant/brands repository.
+  common-modules: done
+  config-flow-test-coverage: done
+  config-flow: done
+  dependency-transparency: done
+  docs-actions:
+    status: exempt
+    comment: This integration does not provide additional actions.
+  docs-conditions:
+    status: exempt
+    comment: This integration does not have any conditions.
+  docs-high-level-description: done
+  docs-installation-instructions: done
+  docs-removal-instructions: done
+  docs-triggers:
+    status: exempt
+    comment: This integration does not have any triggers.
+  entity-event-setup: done
+  entity-unique-id: done
+  has-entity-name: done
+  runtime-data:
+    status: exempt
+    comment: This integration does not store runtime data.
+  test-before-configure:
+    status: exempt
+    comment: |
+      Commands go through an existing infrared entity and IR is one-way,
+      so there is no connection to test in the config flow.
+  test-before-setup:
+    status: exempt
+    comment: |
+      Commands go through an existing infrared entity; its availability
+      is tracked by the entities instead.
+  unique-config-entry: done
+  # Silver
+  action-exceptions: done
+  config-entry-unloading: done
+  docs-configuration-parameters:
+    status: exempt
+    comment: This integration has no options flow.
+  docs-installation-parameters: done
+  entity-unavailable: done
+  integration-owner: done
+  log-when-unavailable: done
+  parallel-updates: done
+  reauthentication-flow:
+    status: exempt
+    comment: This integration does not require authentication.
+  test-coverage: done
+  # Gold
+  devices: done
+  diagnostics: done
+  discovery-update-info:
+    status: exempt
+    comment: Infrared devices cannot be discovered.
+  discovery:
+    status: exempt
+    comment: Infrared devices cannot be discovered.
+  docs-data-update:
+    status: exempt
+    comment: This integration does not fetch data from the device.
+  docs-examples: done
+  docs-known-limitations: done
+  docs-supported-devices: done
+  docs-supported-functions: done
+  docs-troubleshooting: done
+  docs-use-cases: done
+  dynamic-devices:
+    status: exempt
+    comment: Each config entry creates a single device.
+  entity-category: done
+  entity-device-class: done
+  entity-disabled-by-default: done
+  entity-translations: done
+  exception-translations:
+    status: exempt
+    comment: This integration does not raise exceptions of its own.
+  icon-translations: done
+  reconfiguration-flow: done
+  repair-issues:
+    status: exempt
+    comment: This integration does not have repairable issues.
+  stale-devices:
+    status: exempt
+    comment: Each config entry manages exactly one device.
+  # Platinum
+  async-dependency:
+    status: exempt
+    comment: infrared_protocols only builds IR timings and does no I/O.
+  inject-websession:
+    status: exempt
+    comment: This integration does not make HTTP requests.
+  strict-typing: done

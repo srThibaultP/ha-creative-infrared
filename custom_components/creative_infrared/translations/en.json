@@ -7,12 +7,26 @@
         "data": {
           "infrared_entity_id": "Infrared emitter",
           "name": "Name"
+        },
+        "data_description": {
+          "infrared_entity_id": "Infrared entity that sends the remote codes.",
+          "name": "Name of the soundbar device."
+        }
+      },
+      "reconfigure": {
+        "description": "Pick another IR emitter for the soundbar.",
+        "data": {
+          "infrared_entity_id": "Infrared emitter"
+        },
+        "data_description": {
+          "infrared_entity_id": "Infrared entity that sends the remote codes."
         }
       }
     },
     "abort": {
       "already_configured": "This emitter is already used by a soundbar.",
-      "no_emitters": "No infrared emitter found. Set up an emitter (ESPHome, ZHA...) first."
+      "no_emitters": "No infrared emitter found. Set up an emitter (ESPHome, ZHA...) first.",
+      "reconfigure_successful": "The soundbar now uses the new emitter."
     }
   },
   "entity": {

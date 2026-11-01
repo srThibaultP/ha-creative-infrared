@@ -7,12 +7,26 @@
         "data": {
           "infrared_entity_id": "Émetteur infrarouge",
           "name": "Nom"
+        },
+        "data_description": {
+          "infrared_entity_id": "Entité infrarouge qui envoie les codes de la télécommande.",
+          "name": "Nom de l'appareil barre de son."
+        }
+      },
+      "reconfigure": {
+        "description": "Choisissez un autre émetteur IR pour la barre de son.",
+        "data": {
+          "infrared_entity_id": "Émetteur infrarouge"
+        },
+        "data_description": {
+          "infrared_entity_id": "Entité infrarouge qui envoie les codes de la télécommande."
         }
       }
     },
     "abort": {
       "already_configured": "Cet émetteur est déjà utilisé par une barre de son.",
-      "no_emitters": "Aucun émetteur infrarouge trouvé. Configurez d'abord un émetteur (ESPHome, ZHA...)."
+      "no_emitters": "Aucun émetteur infrarouge trouvé. Configurez d'abord un émetteur (ESPHome, ZHA...).",
+      "reconfigure_successful": "La barre de son utilise maintenant le nouvel émetteur."
     }
   },
   "entity": {

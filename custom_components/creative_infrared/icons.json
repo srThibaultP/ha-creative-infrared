@@ -1,0 +1,22 @@
+{
+  "entity": {
+    "button": {
+      "power": { "default": "mdi:power" },
+      "mute": { "default": "mdi:volume-off" },
+      "tv_arc_usb": { "default": "mdi:television" },
+      "opt_aux": { "default": "mdi:audio-input-stereo-minijack" },
+      "bluetooth": { "default": "mdi:bluetooth" },
+      "volume_up": { "default": "mdi:volume-plus" },
+      "volume_down": { "default": "mdi:volume-minus" },
+      "next": { "default": "mdi:skip-next" },
+      "previous": { "default": "mdi:skip-previous" },
+      "play_pause": { "default": "mdi:play-pause" },
+      "surround": { "default": "mdi:surround-sound" },
+      "reset": { "default": "mdi:restore" },
+      "dialog": { "default": "mdi:account-voice" },
+      "more": { "default": "mdi:plus" },
+      "less": { "default": "mdi:minus" },
+      "bass_treble": { "default": "mdi:tune-vertical" }
+    }
+  }
+}

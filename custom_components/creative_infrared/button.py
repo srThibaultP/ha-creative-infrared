@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 from homeassistant.components.button import ButtonEntity, ButtonEntityDescription
 from homeassistant.config_entries import ConfigEntry
+from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
@@ -20,8 +21,30 @@ class CreativeButtonEntityDescription(ButtonEntityDescription):
     code: CreativeStageV2Code
 
 
-BUTTONS = tuple(
-    CreativeButtonEntityDescription(key=code.name.lower(), translation_key=code.name.lower(), code=code)
+# Keys the media player already covers are disabled by default
+_MEDIA_PLAYER_CODES = {
+    CreativeStageV2Code.POWER,
+    CreativeStageV2Code.MUTE,
+    CreativeStageV2Code.TV_ARC_USB,
+    CreativeStageV2Code.OPT_AUX,
+    CreativeStageV2Code.BLUETOOTH,
+    CreativeStageV2Code.VOLUME_UP,
+    CreativeStageV2Code.VOLUME_DOWN,
+    CreativeStageV2Code.NEXT,
+    CreativeStageV2Code.PREVIOUS,
+    CreativeStageV2Code.PLAY_PAUSE,
+}
+
+BUTTONS: tuple[CreativeButtonEntityDescription, ...] = tuple(
+    CreativeButtonEntityDescription(
+        key=code.name.lower(),
+        translation_key=code.name.lower(),
+        code=code,
+        entity_category=(
+            None if code in _MEDIA_PLAYER_CODES else EntityCategory.CONFIG
+        ),
+        entity_registry_enabled_default=code not in _MEDIA_PLAYER_CODES,
+    )
     for code in CreativeStageV2Code
 )
 
