@@ -1,0 +1,12 @@
+{
+  "domain": "creative_infrared",
+  "name": "Creative Infrared",
+  "codeowners": ["@srThibaultP"],
+  "config_flow": true,
+  "dependencies": ["infrared"],
+  "documentation": "https://github.com/srThibaultP/ha-creative-infrared",
+  "issue_tracker": "https://github.com/srThibaultP/ha-creative-infrared/issues",
+  "integration_type": "device",
+  "iot_class": "assumed_state",
+  "version": "0.1.0"
+}

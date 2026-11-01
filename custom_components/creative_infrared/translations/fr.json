@@ -1,0 +1,70 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Barre de son Creative (infrarouge)",
+        "description": "Choisissez l'émetteur IR orienté vers la barre de son.",
+        "data": {
+          "infrared_entity_id": "Émetteur infrarouge",
+          "name": "Nom"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Cet émetteur est déjà utilisé par une barre de son.",
+      "no_emitters": "Aucun émetteur infrarouge trouvé. Configurez d'abord un émetteur (ESPHome, ZHA...)."
+    }
+  },
+  "entity": {
+    "button": {
+      "power": {
+        "name": "Marche / Arrêt"
+      },
+      "mute": {
+        "name": "Muet"
+      },
+      "tv_arc_usb": {
+        "name": "TV ARC / USB"
+      },
+      "opt_aux": {
+        "name": "OPT / AUX"
+      },
+      "bluetooth": {
+        "name": "Bluetooth"
+      },
+      "volume_up": {
+        "name": "Volume +"
+      },
+      "volume_down": {
+        "name": "Volume -"
+      },
+      "next": {
+        "name": "Suivant"
+      },
+      "previous": {
+        "name": "Précédent"
+      },
+      "play_pause": {
+        "name": "Lecture / Pause"
+      },
+      "surround": {
+        "name": "Surround"
+      },
+      "reset": {
+        "name": "Réinitialiser"
+      },
+      "dialog": {
+        "name": "Dialogues"
+      },
+      "more": {
+        "name": "Plus"
+      },
+      "less": {
+        "name": "Moins"
+      },
+      "bass_treble": {
+        "name": "Graves / Aigus"
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Creative soundbar (infrared)",
+        "description": "Pick the IR emitter that faces the soundbar.",
+        "data": {
+          "infrared_entity_id": "Infrared emitter",
+          "name": "Name"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "This emitter is already used by a soundbar.",
+      "no_emitters": "No infrared emitter found. Set up an emitter (ESPHome, ZHA...) first."
+    }
+  },
+  "entity": {
+    "button": {
+      "power": {
+        "name": "Power"
+      },
+      "mute": {
+        "name": "Mute"
+      },
+      "tv_arc_usb": {
+        "name": "TV ARC / USB"
+      },
+      "opt_aux": {
+        "name": "OPT / AUX"
+      },
+      "bluetooth": {
+        "name": "Bluetooth"
+      },
+      "volume_up": {
+        "name": "Volume up"
+      },
+      "volume_down": {
+        "name": "Volume down"
+      },
+      "next": {
+        "name": "Next"
+      },
+      "previous": {
+        "name": "Previous"
+      },
+      "play_pause": {
+        "name": "Play / Pause"
+      },
+      "surround": {
+        "name": "Surround"
+      },
+      "reset": {
+        "name": "Reset"
+      },
+      "dialog": {
+        "name": "Dialog"
+      },
+      "more": {
+        "name": "More"
+      },
+      "less": {
+        "name": "Less"
+      },
+      "bass_treble": {
+        "name": "Bass / Treble"
+      }
+    }
+  }
+}
