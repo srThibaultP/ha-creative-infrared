@@ -32,7 +32,7 @@ To switch to another emitter later, use **Reconfigure** on the integration entry
 
 | Entity | Description |
 | --- | --- |
-| Media player | Turn on/off, volume up/down, mute, play/pause, next/previous, source (TV ARC / USB, OPT / AUX, Bluetooth). |
+| Media player | Power (toggle), volume up/down, mute, play/pause, next/previous, source (TV ARC / USB, OPT / AUX, Bluetooth). |
 | Surround, Dialog, Bass / Treble, More, Less, Reset buttons | Sound settings keys (configuration category). |
 | Power, Mute, source, volume and transport buttons | Same keys as the media player, disabled by default; enable them if you prefer raw key presses. |
 
@@ -73,7 +73,8 @@ Use cases: voice control through Assist, turning the soundbar off with the rest 
 
 ## Known limitations
 
-- IR is one-way: power, mute and source are **assumed** from the last command Home Assistant sent (and restored after a restart). If you use the physical remote, the state can drift; press **Power** or **Mute** on the media player card (or the disabled-by-default raw buttons) to get back in sync.
+- The soundbar has a single power key that toggles, and it also turns itself on and off (auto standby, HDMI CEC with the TV). Home Assistant cannot know its real power state, so the media player always shows *on* and both **turn on** and **turn off** press the power key. To turn the soundbar off from an automation only when it is on, use a real signal (TV state, smart plug power).
+- IR is one-way: mute and source are **assumed** from the last command Home Assistant sent (and restored after a restart). If you use the physical remote, mute can drift; press **Mute** once (or the disabled-by-default raw button) to get back in sync.
 - There is no absolute volume, only volume steps.
 - Each source key toggles between the two inputs printed on it (TV ARC / USB, OPT / AUX), so the reported source is the key, not the exact input.
 - This integration does not poll and cannot discover devices.
@@ -82,7 +83,7 @@ Use cases: voice control through Assist, turning the soundbar off with the rest 
 
 - **The soundbar does not react:** check that the emitter entity's state (a timestamp) changes when you press a button. If it does, move the emitter closer or aim it at the soundbar's IR window. If it does not, check the emitter device itself.
 - **Entities are unavailable:** the IR emitter entity is unavailable (device offline). They come back on their own.
-- **On/off is inverted:** the assumed state drifted; see Known limitations.
+- **On/off seemed inverted (before 0.2.1):** older versions tracked an assumed power state that drifted. Update to 0.2.1 or later; power is now a plain toggle.
 - Download the diagnostics from the integration entry when opening an issue.
 
 ## Removal
