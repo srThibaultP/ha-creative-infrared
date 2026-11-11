@@ -7,7 +7,6 @@ from homeassistant.components.media_player import (
     MediaPlayerState,
 )
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import STATE_OFF
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.restore_state import RestoreEntity
@@ -30,8 +29,11 @@ async def async_setup_entry(
 class CreativeIrMediaPlayer(CreativeIrEntity, MediaPlayerEntity, RestoreEntity):
     """Creative IR media player.
 
-    IR is one-way, so power, mute and source are assumed from the last command
-    sent and restored across restarts.
+    IR is one-way and the soundbar has a single power toggle that it also
+    flips on its own (auto standby, HDMI CEC), so the power state is not
+    tracked: the entity stays on and both turn on and turn off send the power
+    key. Mute and source are assumed from the last command sent and restored
+    across restarts.
     """
 
     _attr_name = None
@@ -61,8 +63,6 @@ class CreativeIrMediaPlayer(CreativeIrEntity, MediaPlayerEntity, RestoreEntity):
         await super().async_added_to_hass()
         if (last := await self.async_get_last_state()) is None:
             return
-        if last.state == STATE_OFF:
-            self._attr_state = MediaPlayerState.OFF
         self._attr_is_volume_muted = bool(last.attributes.get("is_volume_muted"))
         if (source := last.attributes.get("source")) in SOURCES:
             self._attr_source = source
@@ -72,16 +72,12 @@ class CreativeIrMediaPlayer(CreativeIrEntity, MediaPlayerEntity, RestoreEntity):
         self.async_write_ha_state()
 
     async def async_turn_on(self) -> None:
-        """Turn on (the power button toggles)."""
-        if self._attr_state == MediaPlayerState.OFF:
-            self._attr_state = MediaPlayerState.ON
-            await self._press(CreativeStageV2Code.POWER)
+        """Press the power key (it toggles)."""
+        await self._send_code(CreativeStageV2Code.POWER)
 
     async def async_turn_off(self) -> None:
-        """Turn off (the power button toggles)."""
-        if self._attr_state != MediaPlayerState.OFF:
-            self._attr_state = MediaPlayerState.OFF
-            await self._press(CreativeStageV2Code.POWER)
+        """Press the power key (it toggles)."""
+        await self._send_code(CreativeStageV2Code.POWER)
 
     async def async_volume_up(self) -> None:
         """Send volume up."""
@@ -120,6 +116,4 @@ class CreativeIrMediaPlayer(CreativeIrEntity, MediaPlayerEntity, RestoreEntity):
     async def async_select_source(self, source: str) -> None:
         """Press the source button."""
         self._attr_source = source
-        if self._attr_state == MediaPlayerState.OFF:
-            self._attr_state = MediaPlayerState.ON
         await self._press(SOURCES[source])

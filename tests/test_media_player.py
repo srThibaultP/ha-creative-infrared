@@ -70,6 +70,7 @@ async def test_entities(
 @pytest.mark.parametrize(
     ("service", "service_data", "expected_code"),
     [
+        (SERVICE_TURN_ON, {}, CreativeStageV2Code.POWER),
         (SERVICE_TURN_OFF, {}, CreativeStageV2Code.POWER),
         (SERVICE_VOLUME_UP, {}, CreativeStageV2Code.VOLUME_UP),
         (SERVICE_VOLUME_DOWN, {}, CreativeStageV2Code.VOLUME_DOWN),
@@ -104,25 +105,22 @@ async def test_action_sends_code(
 
 
 @pytest.mark.usefixtures("init_integration")
-async def test_power_toggle_is_tracked(
+async def test_power_is_not_tracked(
     hass: HomeAssistant,
     mock_infrared_emitter_entity: MockInfraredEmitterEntity,
 ) -> None:
-    """Test the power key is only sent when the assumed state changes."""
+    """Test turn on and turn off always send the power toggle.
+
+    The soundbar flips power on its own (auto standby, HDMI CEC), so an
+    assumed on/off state would drift and invert the buttons.
+    """
+    await _call(hass, SERVICE_TURN_OFF)
+    await _call(hass, SERVICE_TURN_OFF)
     await _call(hass, SERVICE_TURN_ON)
-    await _call(hass, SERVICE_TURN_OFF)
-    await _call(hass, SERVICE_TURN_OFF)
-    assert hass.states.get(ENTITY_ID).state == STATE_OFF
+    await _call(hass, SERVICE_TURN_ON)
 
-    await _call(hass, SERVICE_SELECT_SOURCE, **{ATTR_INPUT_SOURCE: "OPT / AUX"})
-
-    assert _sent(mock_infrared_emitter_entity) == [
-        CreativeStageV2Code.POWER,
-        CreativeStageV2Code.OPT_AUX,
-    ]
-    state = hass.states.get(ENTITY_ID)
-    assert state.state == STATE_ON
-    assert state.attributes[ATTR_INPUT_SOURCE] == "OPT / AUX"
+    assert _sent(mock_infrared_emitter_entity) == [CreativeStageV2Code.POWER] * 4
+    assert hass.states.get(ENTITY_ID).state == STATE_ON
 
 
 @pytest.mark.usefixtures("init_integration")
@@ -147,7 +145,7 @@ async def test_state_is_restored(
     mock_config_entry: MockConfigEntry,
     mock_infrared_emitter_entity: MockInfraredEmitterEntity,
 ) -> None:
-    """Test power, mute and source are restored after a restart."""
+    """Test mute and source are restored after a restart, power is not."""
     mock_restore_cache(
         hass,
         [
@@ -163,12 +161,10 @@ async def test_state_is_restored(
     await hass.async_block_till_done()
 
     state = hass.states.get(ENTITY_ID)
-    assert state.state == STATE_OFF
-    await _call(hass, SERVICE_TURN_ON)
-    state = hass.states.get(ENTITY_ID)
+    assert state.state == STATE_ON
     assert state.attributes[ATTR_MEDIA_VOLUME_MUTED] is True
     assert state.attributes[ATTR_INPUT_SOURCE] == "Bluetooth"
-    assert _sent(mock_infrared_emitter_entity) == [CreativeStageV2Code.POWER]
+    assert _sent(mock_infrared_emitter_entity) == []
 
 
 @pytest.mark.usefixtures("init_integration")
