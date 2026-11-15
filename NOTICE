@@ -1,0 +1,10 @@
+Creative Infrared for Home Assistant
+
+The MIT license in LICENSE covers the original work in this repository by
+Thibault PECH and contributors.
+
+The icon and logo in custom_components/creative_infrared/brand/ are
+Creative's: the icon is the official Creative app icon, the logo is the
+Creative wordmark. The Creative name and logo are trademarks of Creative
+Technology Ltd; LICENSE does not cover them, and they are used here only to
+identify the products this integration works with.
